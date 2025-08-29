@@ -383,7 +383,7 @@ Y si tenés dudas, preguntame lo que quieras — te voy a acompañar a armar tu 
                   ))
                 : filteredHouses.map((h) => (
                     <div
-                      className="border border-[#e6ddc7] bg-[#f8f6f0] text-[#8b7355] p-4 flex flex-col gap-2 shadow-sm hover:shadow-md transition-all duration-300 hover:scale-105"
+                      className="border border-[#e6ddc7] bg-white text-[#8b7355] p-4 flex flex-col gap-2 shadow-sm hover:shadow-md transition-all duration-300 hover:scale-105"
                       key={h.id}
                     >
                       <div className="flex gap-2 mb-2">
