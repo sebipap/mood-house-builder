@@ -39,25 +39,25 @@ const getImageTypeLabel = (imageType: ImageType): string => {
 
 // Skeleton components
 const HouseSkeleton = () => (
-  <div className="border border-amber-200 p-4 rounded-xl flex flex-col gap-2 bg-white shadow-sm animate-pulse">
+  <div className="border border-[#e6ddc7] bg-[#f8f6f0] p-4 flex flex-col gap-2 shadow-sm animate-pulse">
     <div className="flex gap-2 mb-2">
-      <div className="h-5 w-12 bg-gray-200 rounded"></div>
-      <div className="h-5 w-8 bg-gray-200 rounded"></div>
-      <div className="h-5 w-16 bg-gray-200 rounded"></div>
+      <div className="h-5 w-12 bg-gray-200"></div>
+      <div className="h-5 w-8 bg-gray-200"></div>
+      <div className="h-5 w-16 bg-gray-200"></div>
     </div>
     <div className="flex flex-wrap gap-1 mb-2">
-      <div className="h-4 w-16 bg-gray-200 rounded"></div>
-      <div className="h-4 w-20 bg-gray-200 rounded"></div>
+      <div className="h-4 w-16 bg-gray-200"></div>
+      <div className="h-4 w-20 bg-gray-200"></div>
     </div>
-    <div className="w-full h-48 bg-gray-200 rounded animate-pulse"></div>
+    <div className="w-full h-48 bg-gray-200 animate-pulse"></div>
   </div>
 );
 
 const TypingIndicator = () => (
   <div className="flex space-x-1">
-    <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce [animation-delay:-0.3s]"></div>
-    <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce [animation-delay:-0.15s]"></div>
-    <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
+    <div className="w-2 h-2 rounded bg-[#a89584] animate-bounce [animation-delay:-0.3s]"></div>
+    <div className="w-2 h-2 rounded bg-[#a89584] animate-bounce [animation-delay:-0.15s]"></div>
+    <div className="w-2 h-2 rounded bg-[#a89584] animate-bounce"></div>
   </div>
 );
 
@@ -133,22 +133,22 @@ Y si tenés dudas, preguntame lo que quieras — te voy a acompañar a armar tu 
   }, [messages, status]);
 
   return (
-    <div className="flex flex-col h-screen bg-white">
+    <div className="flex flex-col h-screen bg-[#f8f6f0]">
       {/* Header with Logo and Stepper */}
-      <div className="bg-white shadow-sm border-b border-neutral-300 px-6 py-4">
+      <div className="shadow-sm border-b px-6 py-4 bg-white">
         <div className="flex items-center justify-between max-w-6xl mx-auto">
           {/* Logo and Brand */}
           <div className="flex items-center gap-3">
             <img
               src="/mood/iso.avif"
               alt="MOOD Logo"
-              className="w-10 h-10 p-1 rounded-full object-cover bg-white shadow-sm"
+              className="w-10 h-10 p-1 rounded-full object-cover  shadow-sm"
             />
             <div>
-              <h1 className="text-lg font-semibold text-neutral-800">MOOD</h1>
-              <p className="text-xs text-neutral-600">
-                House Builder Assistant
-              </p>
+              <h1 className="text-2xl font-playfair font-normal text-[#8b7355]">
+                MOOD
+              </h1>
+              <p className="text-xs text-[#a89584]">House Builder Assistant</p>
             </div>
           </div>
 
@@ -156,13 +156,10 @@ Y si tenés dudas, preguntame lo que quieras — te voy a acompañar a armar tu 
           <div className="flex items-center space-x-8">
             {/* Step 1 */}
             <div className="flex items-center">
-              <div
-                className="flex items-center justify-center w-8 h-8 rounded-full text-sm font-semibold"
-                style={{ backgroundColor: "#f5f2ed", color: "#8b7355" }}
-              >
+              <div className="flex items-center justify-center w-8 h-8 rounded-full text-sm font-semibold bg-[#f5f2ed] text-[#8b7355]">
                 1
               </div>
-              <span className="ml-2 text-sm font-medium text-neutral-700">
+              <span className="ml-2 text-sm font-medium text-[#8b7355]">
                 Tamaño
               </span>
             </div>
@@ -214,11 +211,11 @@ Y si tenés dudas, preguntame lo que quieras — te voy a acompañar a armar tu 
         {/* Chat Panel */}
         <div
           className={cn(
-            "w-1/4 flex flex-col bg-white border-r border-neutral-300 shadow-lg",
+            "w-1/4 flex flex-col shadow-lg",
             filteredHouses.length === 0 && "w-full"
           )}
         >
-          <div className="flex-1 overflow-y-auto p-6 space-y-4">
+          <div className="flex-1 overflow-y-auto p-6 space-y-4 bg-[#f8f6f0]">
             {messages.map((message) => (
               <div
                 key={message.id}
@@ -227,28 +224,28 @@ Y si tenés dudas, preguntame lo que quieras — te voy a acompañar a armar tu 
                   message.role === "user" ? "justify-end" : "justify-start"
                 )}
               >
-                <div
-                  className={cn(
-                    message.role === "user"
-                      ? "text-white bg-[#8b7355]"
-                      : "bg-gray-100 text-gray-800",
-                    `w-fit px-4 py-2 rounded-lg`
-                  )}
-                >
-                  {message.role === "user" ? (
-                    <div className="text-wrap whitespace-break-spaces">
-                      {message.parts
-                        .map((p) => (p.type === "text" ? p.text : ""))
-                        .join("")}
+                {message.role === "user" ? (
+                  <div className={cn("relative ml-8")}>
+                    {/* User chat bubble tail */}
+                    <div className="absolute w-0 h-0 right-0 top-3 -right-2 border-l-[8px] border-l-[#8b7355] border-t-[6px] border-b-[6px] border-t-transparent border-b-transparent" />
+
+                    <div className="w-fit max-w-full px-4 py-2 text-white bg-[#8b7355]">
+                      <div className="text-wrap whitespace-break-spaces">
+                        {message.parts
+                          .map((p) => (p.type === "text" ? p.text : ""))
+                          .join("")}
+                      </div>
                     </div>
-                  ) : (
+                  </div>
+                ) : (
+                  <div className="w-full max-w-full px-4 py-2 text-gray-800 bg-[#f0ebe1] break-words overflow-hidden">
                     <div className="prose prose-sm max-w-none prose-headings:text-gray-800 prose-strong:text-gray-800 prose-p:text-gray-800 prose-li:text-gray-800">
                       {message.parts.length === 0 ||
                       (message.parts.filter((p) => p.type === "text").length ===
                         0 &&
                         status === "streaming") ? (
                         <div className="flex justify-start">
-                          <div className="bg-gray-100 rounded-lg p-2">
+                          <div className="p-2 bg-[#f0ebe1]">
                             <TypingIndicator />
                           </div>
                         </div>
@@ -317,16 +314,17 @@ Y si tenés dudas, preguntame lo que quieras — te voy a acompañar a armar tu 
                         </div>
                       )}
                     </div>
-                  )}
-                </div>
+                  </div>
+                )}
               </div>
             ))}
+
             {/* Invisible element to scroll to */}
             <div ref={messagesEndRef} />
           </div>
 
           {/* Input Form */}
-          <div className="border-t border-neutral-200 p-4">
+          <div className="border-t border-[#e6ddc7] bg-[#f8f6f0] p-4">
             <form
               onSubmit={(e) => {
                 e.preventDefault();
@@ -338,27 +336,14 @@ Y si tenés dudas, preguntame lo que quieras — te voy a acompañar a armar tu 
               className="flex gap-2"
             >
               <input
-                className="flex-1 px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 text-black bg-white"
-                style={{ "--tw-ring-color": "#8b7355" } as React.CSSProperties}
+                className="flex-1 px-3 py-2 border border-[#e6ddc7] bg-[#f8f6f0] focus:outline-none focus:ring-2 focus:ring-[#8b7355] text-black"
                 value={input}
                 placeholder="Escribe tu mensaje..."
                 onChange={(e) => setInput(e.currentTarget.value)}
               />
               <button
                 type="submit"
-                className="px-4 py-2 text-white rounded-lg focus:outline-none focus:ring-2 transition-colors"
-                style={
-                  {
-                    backgroundColor: "#8b7355",
-                    "--tw-ring-color": "#8b7355",
-                  } as React.CSSProperties
-                }
-                onMouseEnter={(e) =>
-                  (e.currentTarget.style.backgroundColor = "#6b5943")
-                }
-                onMouseLeave={(e) =>
-                  (e.currentTarget.style.backgroundColor = "#8b7355")
-                }
+                className="px-4 py-2 text-white bg-[#8b7355] hover:bg-[#6b5943] focus:outline-none focus:ring-2 focus:ring-[#8b7355] transition-colors"
               >
                 Enviar
               </button>
@@ -368,7 +353,7 @@ Y si tenés dudas, preguntame lo que quieras — te voy a acompañar a armar tu 
 
         {/* House Display Panel */}
         {filteredHouses.length > 0 && (
-          <div className="w-3/4 bg-gray-50 overflow-y-auto p-6">
+          <div className="w-3/4 overflow-y-auto p-6 bg-[#f0ebe1]">
             {/* Image Type Selection */}
             <div className="mb-4 flex justify-center gap-2">
               {(["facade", "isometric", "layout"] as ImageType[]).map(
@@ -377,18 +362,11 @@ Y si tenés dudas, preguntame lo que quieras — te voy a acompañar a armar tu 
                     key={type}
                     onClick={() => setSelectedImageType(type)}
                     className={cn(
-                      "px-4 py-2 rounded-lg text-sm font-medium transition-colors shadow-sm"
+                      "px-4 py-2 text-sm font-medium transition-colors shadow-sm border",
+                      selectedImageType === type
+                        ? "bg-[#8b7355] text-white"
+                        : "bg-[#f8f6f0] text-[#8b7355] border-[#e6ddc7] hover:bg-[#f0ebe1]"
                     )}
-                    onMouseEnter={(e) => {
-                      if (selectedImageType !== type) {
-                        e.currentTarget.style.backgroundColor = "#f5f2ed";
-                      }
-                    }}
-                    onMouseLeave={(e) => {
-                      if (selectedImageType !== type) {
-                        e.currentTarget.style.backgroundColor = "white";
-                      }
-                    }}
                   >
                     {getImageTypeLabel(type)}
                   </button>
@@ -405,8 +383,7 @@ Y si tenés dudas, preguntame lo que quieras — te voy a acompañar a armar tu 
                   ))
                 : filteredHouses.map((h) => (
                     <div
-                      className="border p-4 rounded-xl flex flex-col gap-2 bg-white shadow-sm hover:shadow-md transition-all duration-300 hover:scale-105"
-                      style={{ borderColor: "#e5ddd1", color: "#8b7355" }}
+                      className="border border-[#e6ddc7] bg-[#f8f6f0] text-[#8b7355] p-4 flex flex-col gap-2 shadow-sm hover:shadow-md transition-all duration-300 hover:scale-105"
                       key={h.id}
                     >
                       <div className="flex gap-2 mb-2">
@@ -431,7 +408,7 @@ Y si tenés dudas, preguntame lo que quieras — te voy a acompañar a armar tu 
                         alt={`${h.type} - ${getImageTypeLabel(
                           selectedImageType
                         )}`}
-                        className="w-full h-auto rounded transition-transform duration-300 hover:scale-105"
+                        className="w-full h-auto transition-transform duration-300"
                       />
                     </div>
                   ))}
