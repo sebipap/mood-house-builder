@@ -54,13 +54,10 @@ const HouseSkeleton = () => (
 );
 
 const TypingIndicator = () => (
-  <div className="flex items-center space-x-1 px-4 py-2">
-    <div className="flex space-x-1">
-      <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce [animation-delay:-0.3s]"></div>
-      <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce [animation-delay:-0.15s]"></div>
-      <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
-    </div>
-    <span className="text-xs text-gray-500 ml-2">Generando respuesta...</span>
+  <div className="flex space-x-1">
+    <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce [animation-delay:-0.3s]"></div>
+    <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce [animation-delay:-0.15s]"></div>
+    <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
   </div>
 );
 
@@ -95,7 +92,26 @@ export default function HouseBuilder() {
         parts: [
           {
             type: "text",
-            text: "# ¡Hola! 🏠\n\nSoy tu asistente de **MOOD**, la solución innovadora para construir tu casa ideal.\n\n## Sobre MOOD\nEn MOOD fabricamos viviendas sostenibles con tecnología **CLT (Madera Laminada Cruzada)** en nuestra fábrica off-site. Nuestras casas son:\n- Modulares\n- Personalizables \n- Respetuosas con el medio ambiente\n\n## ¿Cómo te puedo ayudar?\nTe voy a ayudar a encontrar la configuración perfecta para ti.\n\nPara empezar, contame:\n- ¿Vas a vivir en la casa?\n- ¿Es una vivienda para turismo?\n- ¿Qué capacidad necesitas?\n\n*Haceme todas las preguntas que necesites y te ayudo a armar tu casa perfecta* ✨",
+            text: `# 🌿 Bienvenido a MOOD  
+
+Soy tu asistente personal para que diseñemos juntos **la casa de tus sueños**.  
+
+### Sobre MOOD  
+En **MOOD** fabricamos viviendas sostenibles con tecnología **CLT (Madera Laminada Cruzada)** en nuestra fábrica *off-site*.  
+Nuestras casas son:  
+- 🧩 **Modulares**  
+- 🎨 **Personalizables**  
+- 🌱 **Respetuosas con el medio ambiente**  
+
+### ¿Cómo te puedo ayudar?  
+Estoy acá para guiarte a encontrar la configuración perfecta para vos.  
+
+Para empezar, contame:  
+- 👉 ¿Vas a vivir en la casa o es para turismo?  
+- 👉 ¿Qué capacidad necesitás?  
+
+Y si tenés dudas, preguntame lo que quieras — te voy a acompañar a armar tu casa ideal ✨  
+`,
           },
         ],
       },
@@ -206,21 +222,18 @@ export default function HouseBuilder() {
             {messages.map((message) => (
               <div
                 key={message.id}
-                className={`flex ${
+                className={cn(
+                  "flex",
                   message.role === "user" ? "justify-end" : "justify-start"
-                }`}
+                )}
               >
                 <div
-                  className={`max-w-xs lg:max-w-md px-4 py-2 rounded-lg ${
+                  className={cn(
                     message.role === "user"
-                      ? "text-white"
-                      : "bg-gray-100 text-gray-800"
-                  }`}
-                  style={
-                    message.role === "user"
-                      ? { backgroundColor: "#8b7355" }
-                      : {}
-                  }
+                      ? "text-white bg-[#8b7355]"
+                      : "bg-gray-100 text-gray-800",
+                    `w-fit px-4 py-2 rounded-lg`
+                  )}
                 >
                   {message.role === "user" ? (
                     <div className="text-wrap whitespace-break-spaces">
@@ -240,11 +253,68 @@ export default function HouseBuilder() {
                           </div>
                         </div>
                       ) : (
-                        <ReactMarkdown remarkPlugins={[remarkGfm]}>
-                          {message.parts
-                            .map((p) => (p.type === "text" ? p.text : ""))
-                            .join("")}
-                        </ReactMarkdown>
+                        <div className="prose prose-sm prose-headings:text-gray-800 prose-strong:text-gray-800 prose-p:text-gray-800 prose-li:text-gray-800 prose-a:text-blue-600 prose-a:underline prose-blockquote:border-l-4 prose-blockquote:border-amber-200 prose-blockquote:pl-4 prose-blockquote:text-gray-600 prose-code:bg-gray-100 prose-code:px-1 prose-code:rounded prose-pre:bg-gray-100 prose-pre:p-2 prose-pre:rounded list-disc list-inside">
+                          <ReactMarkdown
+                            remarkPlugins={[remarkGfm]}
+                            components={{
+                              ul: ({ node, ...props }) => (
+                                <ul
+                                  {...props}
+                                  className={cn(
+                                    props.className,
+                                    "list-disc list-inside"
+                                  )}
+                                />
+                              ),
+                              ol: ({ node, ...props }) => (
+                                <ol
+                                  {...props}
+                                  className={cn(
+                                    props.className,
+                                    "list-decimal list-inside"
+                                  )}
+                                />
+                              ),
+                              li: ({ node, ...props }) => (
+                                <li
+                                  {...props}
+                                  className={cn(props.className, "ml-4")}
+                                />
+                              ),
+                              table: ({ node, ...props }) => (
+                                <table
+                                  {...props}
+                                  className={cn(
+                                    props.className,
+                                    "min-w-full border border-amber-200 rounded-lg overflow-hidden bg-white shadow-sm my-4"
+                                  )}
+                                />
+                              ),
+                              thead: ({ node, ...props }) => (
+                                <thead {...props} className="bg-amber-50" />
+                              ),
+                              th: ({ node, ...props }) => (
+                                <th
+                                  {...props}
+                                  className="px-4 py-2 border-b border-amber-200 text-left font-semibold text-amber-900"
+                                />
+                              ),
+                              td: ({ node, ...props }) => (
+                                <td
+                                  {...props}
+                                  className="px-4 py-2 border-b border-amber-100 text-amber-800"
+                                />
+                              ),
+                              tr: ({ node, ...props }) => (
+                                <tr {...props} className="even:bg-amber-50" />
+                              ),
+                            }}
+                          >
+                            {message.parts
+                              .map((p) => (p.type === "text" ? p.text : ""))
+                              .join("")}
+                          </ReactMarkdown>
+                        </div>
                       )}
                     </div>
                   )}
@@ -307,10 +377,7 @@ export default function HouseBuilder() {
                     key={type}
                     onClick={() => setSelectedImageType(type)}
                     className={cn(
-                      "px-4 py-2 rounded-lg text-sm font-medium transition-colors shadow-sm",
-                      selectedImageType === type
-                        ? "text-white shadow-md"
-                        : "bg-white hover:border border-neutral-200"
+                      "px-4 py-2 rounded-lg text-sm font-medium transition-colors shadow-sm"
                     )}
                     onMouseEnter={(e) => {
                       if (selectedImageType !== type) {

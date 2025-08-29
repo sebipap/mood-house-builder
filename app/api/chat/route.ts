@@ -10,6 +10,7 @@ export const maxDuration = 30;
 const systemPrompt = `Eres un asistente especializado de MOOD, empresa uruguaya de viviendas sostenibles. Tu trabajo es guiar al usuario a través del proceso de selección de casas modulares paso a paso.
 
 IMPORTANT: Always format your responses using markdown. Use headers (##, ###), bold (**text**), italics (*text*), lists (- item), and other markdown formatting to make your responses clear and well-structured.
+- Also use markdown tables when possible
 
 use the tools to filter the houses  call selectHouses tool to select the filtered houses you're talking about
 
