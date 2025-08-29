@@ -312,14 +312,6 @@ export default function HouseBuilder() {
                         ? "text-white shadow-md"
                         : "bg-white hover:border border-neutral-200"
                     )}
-                    style={
-                      selectedImageType === type
-                        ? { backgroundColor: "#8b7355" }
-                        : {
-                            color: "#8b7355",
-                            ":hover": { backgroundColor: "#f5f2ed" },
-                          }
-                    }
                     onMouseEnter={(e) => {
                       if (selectedImageType !== type) {
                         e.currentTarget.style.backgroundColor = "#f5f2ed";
